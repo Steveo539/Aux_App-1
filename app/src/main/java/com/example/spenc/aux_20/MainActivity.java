@@ -25,15 +25,13 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.TimeUnit;
 import java.lang.String;
-import java.security.SecureRandom;
+import java.lang.Math;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String CLIENT_ID = "172bb1fe694d4e21b6391329553a52fa";
     private static final String REDIRECT_URI = "http://localhost:8888/callback";
     private SpotifyAppRemote mSpotifyAppRemote;
-    private static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    private static SecureRandom rnd = new SecureRandom();
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         return output;
     }
 
-    public String generateToken(int length){
+    public String generateToken(){
         //Would be used to generate unique n length alphanumeric string to identify 'parties'
         //May want to consider string length for overlap/too hard to enter/etc..
         /*
@@ -156,10 +154,7 @@ public class MainActivity extends AppCompatActivity {
             while(token not in database)
                 token = generateToken(n);
         */
-        StringBuilder stringBuilder = new StringBuilder(length);
-        for( int i = 0; i < length; i++ )
-            stringBuilder.append( stringBuilder.charAt( rnd.nextInt(stringBuilder.length()) ) );
-        return (stringBuilder.toString());
-
+        int token = (int)(Math.random() * 10000) + 10000;
+        return Integer.toString(token);
     }
 }
